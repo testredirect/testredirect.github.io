@@ -2,9 +2,1347 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Redirect | Free URL Redirect Checker Tool - Check 301, 302, 307, 308 Redirects Online</title>
+    <meta name="description" content="Free online redirect checker tool to test 301, 302, 307, 308 redirects instantly. Analyze redirect chains, detect redirect loops, verify HTTPS redirects, check domain redirections, and trace URL redirect paths. Essential SEO tool for webmasters and developers.">
+    <meta name="keywords" content="test redirect, redirect checker, 301 redirect checker, 302 redirect test, check redirect, URL redirect tester, redirect chain checker, redirect loop detector, domain redirect check, HTTPS redirect test, website redirect analyzer, SEO redirect tool, HTTP redirect checker, redirect path tracer, redirect verification tool">
+    <meta name="author" content="TestRedirect">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://testredirect.com">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Test Redirect | Free URL Redirect Checker & Analyzer Tool">
+    <meta property="og:description" content="Instantly test and analyze URL redirects. Check 301, 302, 307, 308 status codes, detect redirect chains and loops, verify HTTPS redirections. Free online redirect checker for SEO professionals.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://testredirect.com">
+    <meta property="og:site_name" content="TestRedirect">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Test Redirect | Free URL Redirect Checker Tool">
+    <meta name="twitter:description" content="Free redirect checker to test 301, 302, 307, 308 redirects. Analyze redirect chains, detect loops, verify HTTPS. Essential SEO tool for webmasters.">
+    <meta name="twitter:site" content="@testredirect">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "TestRedirect - URL Redirect Checker",
+        "description": "Free online tool to test URL redirects, check 301/302/307/308 status codes, analyze redirect chains",
+        "url": "https://testredirect.com",
+        "applicationCategory": "SEO Tool",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+
+    <style>
+        :root {
+            --indigo-50: #eef2ff;
+            --indigo-100: #e0e7ff;
+            --indigo-200: #c7d2fe;
+            --indigo-400: #818cf8;
+            --indigo-500: #6366f1;
+            --indigo-600: #4f46e5;
+            --indigo-700: #4338ca;
+            --indigo-900: #312e81;
+            --indigo-950: #1e1b4b;
+            --rose-400: #fb7185;
+            --rose-500: #f43f5e;
+            --rose-600: #e11d48;
+            --emerald-400: #34d399;
+            --emerald-500: #10b981;
+            --amber-400: #fbbf24;
+            --amber-500: #f59e0b;
+            --sky-400: #38bdf8;
+            --sky-500: #0ea5e9;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--gray-700);
+            line-height: 1.6;
+            background: var(--gray-50);
+        }
+
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0.875rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.375rem;
+            color: var(--indigo-950) !important;
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .brand-logo {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--indigo-600), var(--rose-500));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.125rem;
+        }
+
+        .nav-link {
+            color: var(--gray-600) !important;
+            font-weight: 500;
+            font-size: 0.9375rem;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover { color: var(--indigo-600) !important; background: var(--indigo-50); }
+        .nav-link.active { color: var(--indigo-600) !important; background: var(--indigo-50); }
+
+        /* Hero Section - Dark */
+        .hero {
+            background: linear-gradient(135deg, var(--indigo-950) 0%, var(--gray-900) 100%);
+            padding: 5rem 0 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236366f1' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-content { position: relative; z-index: 1; }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: var(--indigo-300);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-pill i { color: var(--rose-400); }
+
+        .hero-title {
+            font-size: 3.25rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.15;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero-title .gradient-text {
+            background: linear-gradient(135deg, var(--indigo-400), var(--rose-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.125rem;
+            color: var(--gray-400);
+            margin-bottom: 2.5rem;
+            max-width: 540px;
+        }
+
+        /* Tool Card */
+        .tool-card {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 2rem;
+        }
+
+        .input-group-custom {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .url-input {
+            flex: 1;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 14px;
+            padding: 1rem 1.25rem;
+            font-size: 1rem;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.2s;
+        }
+
+        .url-input::placeholder { color: var(--gray-500); }
+        .url-input:focus {
+            outline: none;
+            border-color: var(--indigo-500);
+            background: rgba(255,255,255,0.1);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+        }
+
+        .btn-check-url {
+            background: linear-gradient(135deg, var(--rose-500), var(--rose-600));
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .btn-check-url:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(244, 63, 94, 0.4);
+            color: #fff;
+        }
+
+        .protocol-notice {
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: var(--indigo-200);
+        }
+
+        .advanced-btn {
+            color: var(--gray-400);
+            background: transparent;
+            border: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            padding: 0.5rem 0;
+            transition: color 0.2s;
+        }
+
+        .advanced-btn:hover { color: var(--indigo-400); }
+
+        .advanced-panel {
+            background: rgba(0,0,0,0.2);
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-top: 1rem;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .advanced-panel label {
+            color: var(--gray-300);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .advanced-panel select, .advanced-panel input {
+            width: 100%;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .advanced-panel select:focus, .advanced-panel input:focus {
+            outline: none;
+            border-color: var(--indigo-500);
+        }
+
+        .advanced-panel select option { background: var(--gray-800); color: #fff; }
+
+        /* Stats Strip */
+        .stats-strip {
+            background: #fff;
+            border-bottom: 1px solid var(--gray-200);
+            padding: 1.25rem 0;
+        }
+
+        .stat-box { text-align: center; }
+        .stat-num { font-size: 1.75rem; font-weight: 700; color: var(--indigo-600); }
+        .stat-txt { font-size: 0.8125rem; color: var(--gray-500); font-weight: 500; }
+
+        /* Results */
+        .results-area { padding: 3rem 0; background: var(--gray-100); }
+
+        .result-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 1.75rem;
+            margin-bottom: 1.25rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            border: 1px solid var(--gray-200);
+        }
+
+        .result-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .result-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .result-card-icon.indigo { background: var(--indigo-100); color: var(--indigo-600); }
+        .result-card-icon.rose { background: #ffe4e6; color: var(--rose-500); }
+
+        .result-card-title { font-size: 1.125rem; font-weight: 700; color: var(--gray-800); margin: 0; }
+
+        .summary-boxes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 991px) { .summary-boxes { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 575px) { .summary-boxes { grid-template-columns: 1fr; } }
+
+        .summary-box {
+            background: var(--gray-50);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            border: 1px solid var(--gray-200);
+        }
+
+        .summary-box-label {
+            font-size: 0.6875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.75px;
+            color: var(--gray-500);
+            margin-bottom: 0.375rem;
+        }
+
+        .summary-box-value {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            word-break: break-all;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .summary-box-value.ok { color: var(--emerald-500); }
+        .summary-box-value.err { color: var(--rose-500); }
+
+        /* Chain Item */
+        .chain-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--gray-50);
+            border-radius: 12px;
+            margin-bottom: 0.625rem;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s;
+        }
+
+        .chain-item:hover { background: #fff; border-color: var(--indigo-200); }
+
+        .chain-step-num {
+            width: 32px;
+            height: 32px;
+            background: var(--indigo-600);
+            color: #fff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8125rem;
+            flex-shrink: 0;
+        }
+
+        .chain-step-num.done { background: var(--emerald-500); }
+
+        .chain-url {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--gray-700);
+            word-break: break-all;
+            margin-bottom: 0.5rem;
+        }
+
+        .chain-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.625rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .chain-badge.b-2xx { background: #d1fae5; color: #065f46; }
+        .chain-badge.b-301, .chain-badge.b-308 { background: var(--indigo-100); color: var(--indigo-700); }
+        .chain-badge.b-302, .chain-badge.b-307 { background: #fef3c7; color: #92400e; }
+        .chain-badge.b-4xx { background: #fee2e2; color: #991b1b; }
+        .chain-badge.b-5xx { background: #fce7f3; color: #9d174d; }
+
+        .chain-type { font-size: 0.75rem; color: var(--gray-500); margin-left: 0.5rem; }
+
+        /* Error */
+        .error-box {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .error-box h4 { color: var(--rose-600); font-size: 1rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+
+        /* Loading */
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 4px solid var(--gray-200);
+            border-top-color: var(--indigo-500);
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Sections */
+        .sec { padding: 5rem 0; }
+        .sec-white { background: #fff; }
+        .sec-gray { background: var(--gray-100); }
+        .sec-dark { background: var(--gray-900); }
+
+        .sec-header { text-align: center; margin-bottom: 3rem; }
+
+        .sec-badge {
+            display: inline-block;
+            background: var(--indigo-100);
+            color: var(--indigo-700);
+            padding: 0.375rem 1rem;
+            border-radius: 100px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            margin-bottom: 0.875rem;
+        }
+
+        .sec-dark .sec-badge { background: rgba(99, 102, 241, 0.2); color: var(--indigo-400); }
+
+        .sec-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.75rem;
+        }
+
+        .sec-dark .sec-title { color: #fff; }
+
+        .sec-desc {
+            font-size: 1.0625rem;
+            color: var(--gray-500);
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .sec-dark .sec-desc { color: var(--gray-400); }
+
+        /* Feature Cards */
+        .feat-card {
+            background: #fff;
+            border: 1px solid var(--gray-200);
+            border-radius: 20px;
+            padding: 2rem;
+            height: 100%;
+            transition: all 0.3s;
+        }
+
+        .feat-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border-color: var(--indigo-200);
+        }
+
+        .feat-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.375rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .feat-icon.indigo { background: var(--indigo-100); color: var(--indigo-600); }
+        .feat-icon.rose { background: #ffe4e6; color: var(--rose-500); }
+        .feat-icon.amber { background: #fef3c7; color: var(--amber-500); }
+        .feat-icon.emerald { background: #d1fae5; color: var(--emerald-500); }
+        .feat-icon.sky { background: #e0f2fe; color: var(--sky-500); }
+        .feat-icon.purple { background: #ede9fe; color: #7c3aed; }
+
+        .feat-card h3 { font-size: 1.125rem; font-weight: 700; color: var(--gray-800); margin-bottom: 0.625rem; }
+        .feat-card p { font-size: 0.9375rem; color: var(--gray-500); margin-bottom: 1rem; }
+
+        .feat-list { list-style: none; padding: 0; margin: 0; }
+        .feat-list li { font-size: 0.8125rem; color: var(--gray-500); padding: 0.25rem 0; display: flex; align-items: center; gap: 0.5rem; }
+        .feat-list li i { color: var(--indigo-500); font-size: 0.75rem; }
+
+        /* Status Code Cards */
+        .status-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+        }
+
+        .status-card.green { border-color: var(--emerald-500); }
+        .status-card.blue { border-color: var(--sky-500); }
+        .status-card.amber { border-color: var(--amber-500); }
+
+        .status-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 28px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            color: #fff;
+            margin-right: 0.75rem;
+        }
+
+        .status-card.green .status-num { background: var(--emerald-500); }
+        .status-card.blue .status-num { background: var(--sky-500); }
+        .status-card.amber .status-num { background: var(--amber-500); }
+
+        .status-card h4 { font-size: 1rem; font-weight: 700; color: var(--gray-800); margin-bottom: 0.5rem; }
+        .status-card p { font-size: 0.9375rem; color: var(--gray-600); margin-bottom: 0.75rem; }
+
+        /* Terminal Demo */
+        .terminal {
+            background: var(--gray-900);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .terminal-bar {
+            background: var(--gray-800);
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .terminal-dot.red { background: #f43f5e; }
+        .terminal-dot.yellow { background: #fbbf24; }
+        .terminal-dot.green { background: #34d399; }
+
+        .terminal-body {
+            padding: 1.25rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8125rem;
+        }
+
+        .terminal-line { display: flex; align-items: center; padding: 0.375rem 0; }
+        .terminal-num { color: var(--gray-600); width: 20px; }
+        .terminal-url { color: var(--indigo-400); flex: 1; }
+        .terminal-arrow { color: var(--gray-600); margin: 0 0.75rem; }
+        .terminal-code { padding: 0.125rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+        .terminal-code.c301 { background: var(--indigo-900); color: var(--indigo-400); }
+        .terminal-code.c200 { background: #064e3b; color: #34d399; }
+
+        /* Use Cases */
+        .use-card {
+            background: #fff;
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 1.5rem;
+            height: 100%;
+            transition: all 0.2s;
+        }
+
+        .use-card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.06); }
+
+        .use-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+
+        .use-card h4 { font-size: 1rem; font-weight: 700; color: var(--gray-800); margin-bottom: 0.5rem; }
+        .use-card p { font-size: 0.9375rem; color: var(--gray-500); margin-bottom: 0.875rem; }
+
+        /* Steps */
+        .step-row { display: flex; gap: 1.25rem; margin-bottom: 1.75rem; }
+
+        .step-circle {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--indigo-600), var(--rose-500));
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-txt h4 { font-size: 1.0625rem; font-weight: 700; color: var(--gray-800); margin-bottom: 0.375rem; }
+        .step-txt p { font-size: 0.9375rem; color: var(--gray-500); margin: 0; }
+
+        /* Tips Card */
+        .tips-card {
+            background: linear-gradient(135deg, var(--indigo-600), var(--indigo-700));
+            border-radius: 20px;
+            padding: 2rem;
+            color: #fff;
+        }
+
+        .tips-card h4 { font-size: 1.125rem; font-weight: 700; margin-bottom: 1.25rem; }
+
+        .tip-item { display: flex; gap: 0.75rem; margin-bottom: 1rem; }
+        .tip-item:last-child { margin-bottom: 0; }
+        .tip-item i { color: var(--rose-400); margin-top: 0.25rem; }
+        .tip-item strong { display: block; margin-bottom: 0.25rem; }
+        .tip-item span { font-size: 0.875rem; opacity: 0.85; }
+
+        /* FAQ */
+        .faq-item {
+            background: #fff;
+            border: 1px solid var(--gray-200);
+            border-radius: 14px;
+            margin-bottom: 0.75rem;
+            overflow: hidden;
+        }
+
+        .faq-q {
+            padding: 1.125rem 1.5rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .faq-q:hover { background: var(--gray-50); }
+        .faq-q i { color: var(--indigo-500); transition: transform 0.3s; }
+        .faq-q.open i { transform: rotate(180deg); }
+        .faq-a { padding: 0 1.5rem 1.125rem; color: var(--gray-600); display: none; font-size: 0.9375rem; }
+        .faq-a.show { display: block; }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, var(--indigo-950), var(--gray-900));
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(244, 63, 94, 0.15), transparent 70%);
+            top: -200px;
+            right: -100px;
+        }
+
+        .cta-section h2 { font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 0.75rem; position: relative; }
+        .cta-section p { font-size: 1.0625rem; color: var(--gray-400); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; position: relative; }
+
+        .btn-cta {
+            background: linear-gradient(135deg, var(--rose-500), var(--rose-600));
+            color: #fff;
+            font-weight: 600;
+            padding: 1rem 2.25rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.625rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(244, 63, 94, 0.4); color: #fff; }
+
+        /* Footer */
+        .footer {
+            background: var(--gray-900);
+            padding: 4rem 0 2rem;
+            color: var(--gray-400);
+        }
+
+        .footer-brand {
+            font-size: 1.375rem;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.875rem;
+        }
+
+        .footer-brand i { color: var(--rose-500); }
+        .footer-desc { font-size: 0.9375rem; color: var(--gray-500); max-width: 280px; }
+        .footer-title { font-size: 0.9375rem; font-weight: 700; color: #fff; margin-bottom: 1rem; }
+        .footer-links { list-style: none; padding: 0; margin: 0; }
+        .footer-links li { margin-bottom: 0.625rem; }
+        .footer-links a { color: var(--gray-500); text-decoration: none; font-size: 0.9375rem; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--indigo-400); }
+
+        .footer-bottom {
+            border-top: 1px solid var(--gray-800);
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        /* Responsive */
+        @media (max-width: 991px) {
+            .hero-title { font-size: 2.5rem; }
+            .sec-title { font-size: 1.875rem; }
+        }
+
+        @media (max-width: 767px) {
+            .hero { padding: 3rem 0 4rem; }
+            .hero-title { font-size: 2rem; }
+            .hero-subtitle { font-size: 1rem; }
+            .input-group-custom { flex-direction: column; }
+            .btn-check-url { width: 100%; justify-content: center; }
+            .sec { padding: 3.5rem 0; }
+            .cta-section { padding: 3rem 0; }
+            .cta-section h2 { font-size: 1.5rem; }
+        }
+    </style>
 </head>
 <body>
-Test
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span class="brand-logo"><i class="bi bi-arrow-repeat"></i></span>
+                TestRedirect
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Single URL</a></li>
+                    <li class="nav-item"><a class="nav-link" href="bulk-redirect-checker.html">Bulk Checker</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content mb-5 mb-lg-0">
+                    <div class="hero-pill"><i class="bi bi-lightning-charge-fill"></i> Free SEO Tool</div>
+                    <h1 class="hero-title">Test URL <span class="gradient-text">Redirects</span> in Seconds</h1>
+                    <p class="hero-subtitle">Analyze 301, 302, 307, 308 redirects instantly. Detect chains, find loops, verify HTTPS. Everything you need for redirect debugging and SEO audits.</p>
+                    <div class="d-flex flex-wrap gap-4">
+                        <div class="d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i><span class="text-white">Unlimited checks</span></div>
+                        <div class="d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i><span class="text-white">No signup</span></div>
+                        <div class="d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i><span class="text-white">Real-time results</span></div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="tool-card">
+                        <form id="redirectForm">
+                            <div class="input-group-custom">
+                                <input type="text" id="urlInput" class="url-input" placeholder="Enter URL (e.g., example.com)" required>
+                                <button type="submit" class="btn-check-url"><i class="bi bi-arrow-right-circle"></i> Check</button>
+                            </div>
+                            <div id="protocolNotice" class="protocol-notice d-none">
+                                <i class="bi bi-info-circle me-1"></i> HTTPS added automatically. Use http:// prefix if needed.
+                            </div>
+                            <div class="mt-3">
+                                <button type="button" class="advanced-btn" data-bs-toggle="collapse" data-bs-target="#advOpts">
+                                    <i class="bi bi-sliders2"></i> Advanced Options <i class="bi bi-chevron-down"></i>
+                                </button>
+                                <div class="collapse" id="advOpts">
+                                    <div class="advanced-panel">
+                                        <div class="row g-3">
+                                            <div class="col-md-7">
+                                                <label>User Agent</label>
+                                                <select id="userAgent">
+                                                    <option value="Mozilla/5.0 (compatible; WebTools/1.0)">Default</option>
+                                                    <option value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0">Chrome Windows</option>
+                                                    <option value="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/120.0.0.0">Chrome macOS</option>
+                                                    <option value="Mozilla/5.0 (iPhone; CPU iPhone OS 17_0) AppleWebKit/605.1.15">Safari iPhone</option>
+                                                    <option value="Googlebot/2.1 (+http://www.google.com/bot.html)">Googlebot</option>
+                                                    <option value="Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)">Bingbot</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <label>Max Redirects</label>
+                                                <input type="number" id="maxRedirects" min="1" max="20" value="10">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Strip -->
+    <section class="stats-strip">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num">50K+</div><div class="stat-txt">URLs Analyzed</div></div></div>
+                <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num">99.9%</div><div class="stat-txt">Uptime</div></div></div>
+                <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num">4.9★</div><div class="stat-txt">User Rating</div></div></div>
+                <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num">1000</div><div class="stat-txt">Bulk URLs</div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results -->
+    <section id="resultsArea" class="results-area d-none">
+        <div class="container">
+            <div id="loadingBox" class="text-center py-5 d-none">
+                <div class="loader mx-auto mb-3"></div>
+                <p class="text-muted">Tracing redirects...</p>
+            </div>
+            <div id="summaryCard" class="result-card d-none">
+                <div class="result-card-header">
+                    <div class="result-card-icon indigo"><i class="bi bi-clipboard-data"></i></div>
+                    <h2 class="result-card-title">Analysis Summary</h2>
+                </div>
+                <div class="summary-boxes">
+                    <div class="summary-box"><div class="summary-box-label">Original URL</div><div id="origUrl" class="summary-box-value"></div></div>
+                    <div class="summary-box"><div class="summary-box-label">Final URL</div><div id="destUrl" class="summary-box-value ok"></div></div>
+                    <div class="summary-box"><div class="summary-box-label">Redirects</div><div id="numRedirects" class="summary-box-value"></div></div>
+                    <div class="summary-box"><div class="summary-box-label">HTTPS</div><div id="httpsVal" class="summary-box-value"></div></div>
+                </div>
+            </div>
+            <div id="chainCard" class="result-card d-none">
+                <div class="result-card-header">
+                    <div class="result-card-icon rose"><i class="bi bi-diagram-3"></i></div>
+                    <h2 class="result-card-title">Redirect Chain</h2>
+                </div>
+                <div id="chainList"></div>
+            </div>
+            <div id="errorBox" class="error-box d-none">
+                <h4><i class="bi bi-exclamation-octagon"></i> Error</h4>
+                <p id="errorMsg" class="mb-0"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- What Is Section -->
+    <section class="sec sec-white">
+        <div class="container">
+            <div class="sec-header">
+                <span class="sec-badge">Understanding Redirects</span>
+                <h2 class="sec-title">What is a URL Redirect Checker?</h2>
+                <p class="sec-desc">A redirect checker traces the path a URL takes from origin to destination, revealing status codes, chain length, and potential issues that impact SEO and user experience.</p>
+            </div>
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-6">
+                    <h3 class="h4 mb-3" style="color: var(--gray-800);">Why Testing Redirects Matters</h3>
+                    <p class="text-muted mb-4">URL redirects are essential for website maintenance and SEO. When you move content, change domains, or implement HTTPS, redirects guide users and search engines to the right place. Misconfigured redirects can destroy search rankings and frustrate visitors.</p>
+                    <p class="text-muted mb-4">Our tool instantly analyzes redirect configurations, detecting wrong status codes, excessive chains that slow loading, and loops that block access. Whether migrating sites or auditing SEO, proper redirect testing is critical.</p>
+                    <div class="row g-3">
+                        <div class="col-6"><div class="d-flex align-items-center gap-2"><i class="bi bi-check2-circle text-success"></i><span>301 permanent redirects</span></div></div>
+                        <div class="col-6"><div class="d-flex align-items-center gap-2"><i class="bi bi-check2-circle text-success"></i><span>302 temporary redirects</span></div></div>
+                        <div class="col-6"><div class="d-flex align-items-center gap-2"><i class="bi bi-check2-circle text-success"></i><span>Chain detection</span></div></div>
+                        <div class="col-6"><div class="d-flex align-items-center gap-2"><i class="bi bi-check2-circle text-success"></i><span>Loop identification</span></div></div>
+                        <div class="col-6"><div class="d-flex align-items-center gap-2"><i class="bi bi-check2-circle text-success"></i><span>HTTPS verification</span></div></div>
+                        <div class="col-6"><div class="d-flex align-items-center gap-2"><i class="bi bi-check2-circle text-success"></i><span>User agent testing</span></div></div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="terminal">
+                        <div class="terminal-bar">
+                            <span class="terminal-dot red"></span>
+                            <span class="terminal-dot yellow"></span>
+                            <span class="terminal-dot green"></span>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="terminal-line"><span class="terminal-num">1</span><span class="terminal-url">http://example.com</span><span class="terminal-arrow">→</span><span class="terminal-code c301">301</span></div>
+                            <div class="terminal-line"><span class="terminal-num">2</span><span class="terminal-url">http://www.example.com</span><span class="terminal-arrow">→</span><span class="terminal-code c301">301</span></div>
+                            <div class="terminal-line"><span class="terminal-num">3</span><span class="terminal-url">https://www.example.com</span><span class="terminal-arrow">→</span><span class="terminal-code c200">200</span></div>
+                        </div>
+                    </div>
+                    <p class="text-muted small mt-3 text-center">Example redirect chain showing HTTP → HTTPS canonical redirect</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="sec sec-gray">
+        <div class="container">
+            <div class="sec-header">
+                <span class="sec-badge">Features</span>
+                <h2 class="sec-title">Complete Redirect Testing Suite</h2>
+                <p class="sec-desc">Everything you need to analyze, debug, and optimize URL redirects for better SEO and user experience.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="feat-card">
+                        <div class="feat-icon indigo"><i class="bi bi-lightning-charge"></i></div>
+                        <h3>Instant Analysis</h3>
+                        <p>Real-time testing with sub-second response. No waiting, no registration required.</p>
+                        <ul class="feat-list"><li><i class="bi bi-check-lg"></i> Real-time results</li><li><i class="bi bi-check-lg"></i> Unlimited free checks</li><li><i class="bi bi-check-lg"></i> No account needed</li></ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feat-card">
+                        <div class="feat-icon rose"><i class="bi bi-list-check"></i></div>
+                        <h3>All Status Codes</h3>
+                        <p>Detect 301, 302, 303, 307, 308 and more. Understand SEO implications of each.</p>
+                        <ul class="feat-list"><li><i class="bi bi-check-lg"></i> 301/308 permanent</li><li><i class="bi bi-check-lg"></i> 302/307 temporary</li><li><i class="bi bi-check-lg"></i> Clear explanations</li></ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feat-card">
+                        <div class="feat-icon amber"><i class="bi bi-signpost-split"></i></div>
+                        <h3>Chain Visualization</h3>
+                        <p>See every hop from source to destination. Identify bottlenecks and optimize paths.</p>
+                        <ul class="feat-list"><li><i class="bi bi-check-lg"></i> Step-by-step view</li><li><i class="bi bi-check-lg"></i> Chain length analysis</li><li><i class="bi bi-check-lg"></i> Performance insights</li></ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feat-card">
+                        <div class="feat-icon emerald"><i class="bi bi-arrow-repeat"></i></div>
+                        <h3>Loop Detection</h3>
+                        <p>Automatically find infinite redirect loops that block access and waste resources.</p>
+                        <ul class="feat-list"><li><i class="bi bi-check-lg"></i> Circular detection</li><li><i class="bi bi-check-lg"></i> Instant alerts</li><li><i class="bi bi-check-lg"></i> Max redirect limits</li></ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feat-card">
+                        <div class="feat-icon purple"><i class="bi bi-robot"></i></div>
+                        <h3>User Agent Testing</h3>
+                        <p>Test as Googlebot, Chrome, Safari, and more. See what crawlers experience.</p>
+                        <ul class="feat-list"><li><i class="bi bi-check-lg"></i> Googlebot simulation</li><li><i class="bi bi-check-lg"></i> Mobile testing</li><li><i class="bi bi-check-lg"></i> Browser emulation</li></ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feat-card">
+                        <div class="feat-icon sky"><i class="bi bi-stack"></i></div>
+                        <h3>Bulk Checking</h3>
+                        <p>Test up to 1000 URLs at once. Perfect for migrations and comprehensive audits.</p>
+                        <ul class="feat-list"><li><i class="bi bi-check-lg"></i> Up to 1000 URLs</li><li><i class="bi bi-check-lg"></i> CSV export</li><li><i class="bi bi-check-lg"></i> Batch processing</li></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Status Codes -->
+    <section class="sec sec-white">
+        <div class="container">
+            <div class="sec-header">
+                <span class="sec-badge">HTTP Status Codes</span>
+                <h2 class="sec-title">Redirect Codes Explained</h2>
+                <p class="sec-desc">Understanding redirect status codes is essential for SEO. Each code tells search engines something different.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="status-card green">
+                        <h4><span class="status-num">301</span> Moved Permanently</h4>
+                        <p>The SEO-friendly redirect. Passes 90-99% of link equity. Search engines update their index to show the new URL.</p>
+                        <div class="bg-light rounded p-2"><small><strong>Best for:</strong> Domain migrations, URL restructuring, HTTP→HTTPS, merging pages</small></div>
+                    </div>
+                    <div class="status-card blue">
+                        <h4><span class="status-num">302</span> Found (Temporary)</h4>
+                        <p>Temporary redirect. Search engines keep indexing the original URL and don't pass full SEO value.</p>
+                        <div class="bg-light rounded p-2"><small><strong>Best for:</strong> A/B testing, maintenance pages, geo-targeting, seasonal content</small></div>
+                    </div>
+                    <div class="status-card amber">
+                        <h4><span class="status-num">307</span> Temporary Redirect</h4>
+                        <p>Like 302 but preserves HTTP method. POST stays POST. Critical for forms and APIs.</p>
+                        <div class="bg-light rounded p-2"><small><strong>Best for:</strong> Form submissions, API redirects, method-sensitive operations</small></div>
+                    </div>
+                    <div class="status-card green">
+                        <h4><span class="status-num">308</span> Permanent Redirect</h4>
+                        <p>Permanent redirect preserving HTTP method. Like 301 but POST stays POST.</p>
+                        <div class="bg-light rounded p-2"><small><strong>Best for:</strong> Permanent API changes, form action moves</small></div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="p-4 bg-light rounded-4 mb-4">
+                        <h5 class="mb-3"><i class="bi bi-exclamation-triangle text-warning me-2"></i>Common Mistakes</h5>
+                        <div class="d-flex gap-2 mb-3"><i class="bi bi-x-circle text-danger mt-1"></i><div><strong>Using 302 for permanent moves</strong><p class="mb-0 small text-muted">Loses SEO value - use 301 instead</p></div></div>
+                        <div class="d-flex gap-2 mb-3"><i class="bi bi-x-circle text-danger mt-1"></i><div><strong>Long redirect chains (3+ hops)</strong><p class="mb-0 small text-muted">Slows loading, wastes crawl budget</p></div></div>
+                        <div class="d-flex gap-2 mb-3"><i class="bi bi-x-circle text-danger mt-1"></i><div><strong>Redirect loops</strong><p class="mb-0 small text-muted">Blocks access completely</p></div></div>
+                        <div class="d-flex gap-2"><i class="bi bi-x-circle text-danger mt-1"></i><div><strong>Mixed redirect types</strong><p class="mb-0 small text-muted">Inconsistent codes confuse crawlers</p></div></div>
+                    </div>
+                    <div class="p-4 bg-light rounded-4">
+                        <h5 class="mb-3"><i class="bi bi-lightbulb text-warning me-2"></i>Best Practices</h5>
+                        <div class="d-flex gap-2 mb-2"><i class="bi bi-check-circle text-success mt-1"></i><span>Use 301 for all permanent URL changes</span></div>
+                        <div class="d-flex gap-2 mb-2"><i class="bi bi-check-circle text-success mt-1"></i><span>Keep redirect chains to 1-2 hops max</span></div>
+                        <div class="d-flex gap-2 mb-2"><i class="bi bi-check-circle text-success mt-1"></i><span>Update internal links to final URLs</span></div>
+                        <div class="d-flex gap-2 mb-2"><i class="bi bi-check-circle text-success mt-1"></i><span>Test redirects after any site changes</span></div>
+                        <div class="d-flex gap-2"><i class="bi bi-check-circle text-success mt-1"></i><span>Monitor for new redirect issues monthly</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="sec sec-gray">
+        <div class="container">
+            <div class="sec-header">
+                <span class="sec-badge">Use Cases</span>
+                <h2 class="sec-title">When to Test Redirects</h2>
+                <p class="sec-desc">Our redirect checker is essential for website maintenance, SEO audits, and development workflows.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="use-card">
+                        <div class="use-icon" style="background: var(--indigo-100); color: var(--indigo-600);"><i class="bi bi-search"></i></div>
+                        <h4>SEO Audits</h4>
+                        <p>Find redirect issues affecting rankings. Identify wrong status codes and excessive chains.</p>
+                        <ul class="feat-list"><li><i class="bi bi-check-lg"></i> Verify 301s pass value</li><li><i class="bi bi-check-lg"></i> Find misused 302s</li></ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="use-card">
+                        <div class="use-icon" style="background: #ffe4e6; color: var(--rose-500);"><i class="bi bi-globe"></i></div>
+                        <h4>Site Migrations</h4>
+                        <p>Verify redirects work correctly when moving domains or restructuring URLs.</p>
+                        <ul class="feat-list"><li><i class="bi bi-check-lg"></i> Domain migration</li><li><i class="bi bi-check-lg"></i> URL structure changes</li></ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="use-card">
+                        <div class="use-icon" style="background: #d1fae5; color: var(--emerald-500);"><i class="bi bi-shield-lock"></i></div>
+                        <h4>HTTPS Setup</h4>
+                        <p>Confirm HTTP URLs redirect to HTTPS. HTTPS is a ranking factor.</p>
+                        <ul class="feat-list"><li><i class="bi bi-check-lg"></i> HTTP→HTTPS testing</li><li><i class="bi bi-check-lg"></i> SSL verification</li></ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="use-card">
+                        <div class="use-icon" style="background: #fef3c7; color: var(--amber-500);"><i class="bi bi-link-45deg"></i></div>
+                        <h4>Affiliate Links</h4>
+                        <p>Test affiliate and tracking URLs to ensure they work. Broken links = lost revenue.</p>
+                        <ul class="feat-list"><li><i class="bi bi-check-lg"></i> Tracking params</li><li><i class="bi bi-check-lg"></i> Destination testing</li></ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="use-card">
+                        <div class="use-icon" style="background: #fee2e2; color: #dc2626;"><i class="bi bi-bug"></i></div>
+                        <h4>Debugging</h4>
+                        <p>Find why pages aren't loading. Diagnose loops and unexpected destinations.</p>
+                        <ul class="feat-list"><li><i class="bi bi-check-lg"></i> Loop diagnosis</li><li><i class="bi bi-check-lg"></i> Path tracing</li></ul>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="use-card">
+                        <div class="use-icon" style="background: #ede9fe; color: #7c3aed;"><i class="bi bi-bar-chart"></i></div>
+                        <h4>Competitor Analysis</h4>
+                        <p>Analyze competitor redirect strategies. Learn from their implementations.</p>
+                        <ul class="feat-list"><li><i class="bi bi-check-lg"></i> URL patterns</li><li><i class="bi bi-check-lg"></i> Strategy insights</li></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="sec sec-white">
+        <div class="container">
+            <div class="sec-header">
+                <span class="sec-badge">Quick Start</span>
+                <h2 class="sec-title">How to Use</h2>
+                <p class="sec-desc">Test any URL in seconds with these simple steps.</p>
+            </div>
+            <div class="row g-5">
+                <div class="col-lg-6">
+                    <div class="step-row"><div class="step-circle">1</div><div class="step-txt"><h4>Enter URL</h4><p>Type or paste the URL to test. We add HTTPS automatically if not specified.</p></div></div>
+                    <div class="step-row"><div class="step-circle">2</div><div class="step-txt"><h4>Configure (Optional)</h4><p>Select user agent (Googlebot, Chrome, etc.) and max redirects to follow.</p></div></div>
+                    <div class="step-row"><div class="step-circle">3</div><div class="step-txt"><h4>Click Check</h4><p>We trace all redirects and record each hop with status codes.</p></div></div>
+                    <div class="step-row" style="margin-bottom: 0;"><div class="step-circle">4</div><div class="step-txt"><h4>Review Results</h4><p>See the complete chain, final destination, and HTTPS status.</p></div></div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="tips-card">
+                        <h4><i class="bi bi-lightbulb me-2"></i>Pro Tips</h4>
+                        <div class="tip-item"><i class="bi bi-check-circle-fill"></i><div><strong>Test After Changes</strong><span>Always verify redirects after domain or URL changes.</span></div></div>
+                        <div class="tip-item"><i class="bi bi-check-circle-fill"></i><div><strong>Check Both Protocols</strong><span>Test HTTP and HTTPS versions separately.</span></div></div>
+                        <div class="tip-item"><i class="bi bi-check-circle-fill"></i><div><strong>Test as Googlebot</strong><span>See what affects your SEO rankings.</span></div></div>
+                        <div class="tip-item"><i class="bi bi-check-circle-fill"></i><div><strong>Keep Chains Short</strong><span>3+ redirects? Consolidate to one direct redirect.</span></div></div>
+                        <div class="tip-item"><i class="bi bi-check-circle-fill"></i><div><strong>Use Bulk for Migrations</strong><span>Testing 100+ URLs? Use our bulk checker.</span></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="sec sec-gray">
+        <div class="container">
+            <div class="sec-header">
+                <span class="sec-badge">FAQ</span>
+                <h2 class="sec-title">Frequently Asked Questions</h2>
+                <p class="sec-desc">Common questions about URL redirects and SEO best practices.</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="faq-item"><div class="faq-q open">What is a URL redirect?<i class="bi bi-chevron-down"></i></div><div class="faq-a show">A URL redirect automatically sends users and search engines from one URL to another. Testing is crucial because misconfigured redirects cause lost rankings and poor user experience.</div></div>
+                    <div class="faq-item"><div class="faq-q">What's the difference between 301 and 302?<i class="bi bi-chevron-down"></i></div><div class="faq-a">301 is permanent and passes 90-99% of SEO value. 302 is temporary and doesn't pass full value. Use 301 for permanent moves, 302 for temporary situations.</div></div>
+                    <div class="faq-item"><div class="faq-q">How many redirects is too many?<i class="bi bi-chevron-down"></i></div><div class="faq-a">Google recommends max 3 hops, but ideally use 1 direct redirect. Long chains slow loading and waste crawl budget.</div></div>
+                    <div class="faq-item"><div class="faq-q">What is a redirect loop?<i class="bi bi-chevron-down"></i></div><div class="faq-a">A loop occurs when URLs redirect in a circle (A→B→A). This blocks access completely. Fix by identifying and removing circular redirect rules.</div></div>
+                    <div class="faq-item"><div class="faq-q">How do I test as Googlebot?<i class="bi bi-chevron-down"></i></div><div class="faq-a">Click Advanced Options and select Googlebot from the User Agent dropdown. This shows exactly what Google's crawler experiences.</div></div>
+                    <div class="faq-item"><div class="faq-q">Does 301 pass all SEO value?<i class="bi bi-chevron-down"></i></div><div class="faq-a">301s pass approximately 90-99% of link equity, not 100%. Some "PageRank dampening" occurs with any redirect, but 301 is still the best option.</div></div>
+                    <div class="faq-item"><div class="faq-q">Can I test multiple URLs?<i class="bi bi-chevron-down"></i></div><div class="faq-a">Yes! Our <a href="bulk-redirect-checker.html">Bulk Checker</a> tests up to 1000 URLs at once with CSV export.</div></div>
+                    <div class="faq-item"><div class="faq-q">Why does my 301 show as 302?<i class="bi bi-chevron-down"></i></div><div class="faq-a">Possible causes: CDN converting redirects, conflicting rules, CMS/plugins overriding config, or server-level redirects taking precedence. Check all redirect sources.</div></div>
+                    <div class="faq-item"><div class="faq-q">What's 307 vs 302?<i class="bi bi-chevron-down"></i></div><div class="faq-a">Both are temporary, but 307 preserves HTTP method (POST stays POST). For standard page redirects, the difference is usually negligible.</div></div>
+                    <div class="faq-item"><div class="faq-q">How often should I test?<i class="bi bi-chevron-down"></i></div><div class="faq-a">After any redirect-related changes, CMS updates, plugin updates, and during regular SEO audits (monthly or quarterly).</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Need to Test Multiple URLs?</h2>
+            <p>Our bulk redirect checker analyzes up to 1000 URLs at once. Perfect for migrations and audits.</p>
+            <a href="bulk-redirect-checker.html" class="btn-cta"><i class="bi bi-stack"></i> Try Bulk Checker</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="footer-brand"><i class="bi bi-arrow-repeat"></i> TestRedirect</div>
+                    <p class="footer-desc">Free URL redirect checker. Test 301, 302, 307, 308 redirects and optimize your SEO.</p>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5 class="footer-title">Tools</h5>
+                    <ul class="footer-links"><li><a href="index.html">Single URL</a></li><li><a href="bulk-redirect-checker.html">Bulk Checker</a></li></ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5 class="footer-title">Company</h5>
+                    <ul class="footer-links"><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5 class="footer-title">Legal</h5>
+                    <ul class="footer-links"><li><a href="privacy-policy.html">Privacy</a></li><li><a href="terms-of-use.html">Terms</a></li></ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5 class="footer-title">Help</h5>
+                    <ul class="footer-links"><li><a href="contact.html">Support</a></li><li><a href="contact.html">Report Issue</a></li></ul>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 TestRedirect. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const API_BASE = 'https://api.tickspike.com/api/v1';
+
+        document.getElementById('redirectForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const url = document.getElementById('urlInput').value.trim();
+            const ua = document.getElementById('userAgent').value;
+            const maxRed = parseInt(document.getElementById('maxRedirects').value);
+            if (!url) { alert('Please enter a URL'); return; }
+
+            let processedUrl = url;
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                processedUrl = 'https://' + url;
+                document.getElementById('protocolNotice').classList.remove('d-none');
+                setTimeout(() => document.getElementById('protocolNotice').classList.add('d-none'), 6000);
+            } else { document.getElementById('protocolNotice').classList.add('d-none'); }
+
+            await checkRedirect(processedUrl, ua, maxRed);
+        });
+
+        async function checkRedirect(url, ua, maxRed) {
+            const resultsArea = document.getElementById('resultsArea');
+            const loadingBox = document.getElementById('loadingBox');
+            const summaryCard = document.getElementById('summaryCard');
+            const chainCard = document.getElementById('chainCard');
+            const errorBox = document.getElementById('errorBox');
+
+            resultsArea.classList.remove('d-none');
+            loadingBox.classList.remove('d-none');
+            summaryCard.classList.add('d-none');
+            chainCard.classList.add('d-none');
+            errorBox.classList.add('d-none');
+            resultsArea.scrollIntoView({ behavior: 'smooth' });
+
+            try {
+                const res = await fetch(`${API_BASE}/redirect-check/`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Origin': 'https://testredirect.com' },
+                    body: JSON.stringify({ url, user_agent: ua, max_redirects: maxRed })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || data.message || data.detail || 'Failed');
+                showResults(data);
+            } catch (err) {
+                document.getElementById('errorMsg').textContent = err.message;
+                errorBox.classList.remove('d-none');
+            } finally { loadingBox.classList.add('d-none'); }
+        }
+
+        function showResults(data) {
+            document.getElementById('origUrl').textContent = data.original_url;
+            document.getElementById('destUrl').textContent = data.final_url || 'N/A';
+            document.getElementById('numRedirects').textContent = data.total_redirects;
+
+            const httpsVal = document.getElementById('httpsVal');
+            if (data.is_https) {
+                httpsVal.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i> Yes';
+                httpsVal.className = 'summary-box-value ok';
+            } else {
+                httpsVal.innerHTML = '<i class="bi bi-x-circle-fill me-1"></i> No';
+                httpsVal.className = 'summary-box-value err';
+            }
+
+            const chainList = document.getElementById('chainList');
+            chainList.innerHTML = '';
+
+            if (data.redirect_chain && data.redirect_chain.length) {
+                data.redirect_chain.forEach((s, i) => {
+                    const isLast = i === data.redirect_chain.length - 1;
+                    const badgeClass = getBadgeClass(s.status_code);
+                    const label = getLabel(s.status_code);
+                    chainList.innerHTML += `
+                        <div class="chain-item">
+                            <div class="chain-step-num ${isLast ? 'done' : ''}">${i + 1}</div>
+                            <div class="flex-grow-1">
+                                <div class="chain-url">${s.url}</div>
+                                <span class="chain-badge ${badgeClass}">${s.status_code} ${label}</span>
+                                <span class="chain-type">${isLast ? 'Final' : 'Redirect'}</span>
+                            </div>
+                            ${!isLast ? '<i class="bi bi-arrow-down text-muted ms-auto"></i>' : '<i class="bi bi-check-lg text-success ms-auto fs-5"></i>'}
+                        </div>
+                    `;
+                });
+            }
+
+            document.getElementById('summaryCard').classList.remove('d-none');
+            document.getElementById('chainCard').classList.remove('d-none');
+        }
+
+        function getBadgeClass(code) {
+            if (code >= 200 && code < 300) return 'b-2xx';
+            if (code === 301 || code === 308) return 'b-301';
+            if (code === 302 || code === 307) return 'b-302';
+            if (code >= 400 && code < 500) return 'b-4xx';
+            return 'b-5xx';
+        }
+
+        function getLabel(code) {
+            const labels = { 200: 'OK', 301: 'Permanent', 302: 'Found', 307: 'Temp Redirect', 308: 'Permanent', 404: 'Not Found', 500: 'Server Error' };
+            return labels[code] || '';
+        }
+
+        document.querySelectorAll('.faq-q').forEach(q => {
+            q.addEventListener('click', function() {
+                const a = this.nextElementSibling;
+                const isOpen = this.classList.contains('open');
+                document.querySelectorAll('.faq-q').forEach(x => x.classList.remove('open'));
+                document.querySelectorAll('.faq-a').forEach(x => x.classList.remove('show'));
+                if (!isOpen) { this.classList.add('open'); a.classList.add('show'); }
+            });
+        });
+    </script>
 </body>
 </html>
