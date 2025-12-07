@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk Redirect Checker | Test Multiple URLs at Once - TestRedirect</title>
+    <meta name="description" content="Free bulk redirect checker tool to test up to 1000 URLs at once. Analyze 301, 302, 307, 308 redirects in batch, export results to CSV. Perfect for site migrations and SEO audits.">
+    <meta name="keywords" content="bulk redirect checker, batch URL redirect test, multiple URL redirect checker, mass redirect analyzer, site migration tool, SEO bulk redirect test, redirect audit tool">
+    <meta name="author" content="TestRedirect">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://testredirect.github.io/bulk-redirect-checker.html">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <meta property="og:title" content="Bulk Redirect Checker | Test Multiple URLs - TestRedirect">
+    <meta property="og:description" content="Test up to 1000 URLs at once. Bulk redirect checker for site migrations and SEO audits with CSV export.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://testredirect.github.io/bulk-redirect-checker.html">
+    <meta property="og:site_name" content="TestRedirect">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bulk Redirect Checker | Test Multiple URLs">
+    <meta name="twitter:description" content="Test up to 1000 URLs at once. Bulk redirect checker for site migrations and SEO audits.">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --indigo-50: #eef2ff;
+            --indigo-100: #e0e7ff;
+            --indigo-400: #818cf8;
+            --indigo-500: #6366f1;
+            --indigo-600: #4f46e5;
+            --indigo-700: #4338ca;
+            --indigo-900: #312e81;
+            --indigo-950: #1e1b4b;
+            --rose-400: #fb7185;
+            --rose-500: #f43f5e;
+            --rose-600: #e11d48;
+            --emerald-400: #34d399;
+            --emerald-500: #10b981;
+            --amber-500: #f59e0b;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--gray-700);
+            line-height: 1.6;
+            background: var(--gray-50);
+        }
+
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        .navbar {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0.875rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.375rem;
+            color: var(--indigo-950) !important;
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .brand-logo {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--indigo-600), var(--rose-500));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.125rem;
+        }
+
+        .nav-link {
+            color: var(--gray-600) !important;
+            font-weight: 500;
+            font-size: 0.9375rem;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover { color: var(--indigo-600) !important; background: var(--indigo-50); }
+        .nav-link.active { color: var(--indigo-600) !important; background: var(--indigo-50); }
+
+        .hero {
+            background: linear-gradient(135deg, var(--indigo-950) 0%, var(--gray-900) 100%);
+            padding: 4rem 0 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236366f1' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-content { position: relative; z-index: 1; }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: var(--indigo-300);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-pill i { color: var(--rose-400); }
+
+        .hero-title {
+            font-size: 2.75rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title .gradient-text {
+            background: linear-gradient(135deg, var(--indigo-400), var(--rose-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.0625rem;
+            color: var(--gray-400);
+            margin-bottom: 2rem;
+        }
+
+        .tool-card {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 2rem;
+        }
+
+        .url-textarea {
+            width: 100%;
+            min-height: 200px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 14px;
+            padding: 1rem 1.25rem;
+            font-size: 0.9375rem;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            resize: vertical;
+            transition: all 0.2s;
+        }
+
+        .url-textarea::placeholder { color: var(--gray-500); }
+        .url-textarea:focus {
+            outline: none;
+            border-color: var(--indigo-500);
+            background: rgba(255,255,255,0.1);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+        }
+
+        .btn-check-bulk {
+            background: linear-gradient(135deg, var(--rose-500), var(--rose-600));
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .btn-check-bulk:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(244, 63, 94, 0.4);
+            color: #fff;
+        }
+
+        .btn-check-bulk:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-export {
+            background: var(--indigo-600);
+            color: #fff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .btn-export:hover { background: var(--indigo-700); color: #fff; }
+
+        .url-count {
+            color: var(--gray-400);
+            font-size: 0.875rem;
+            margin-top: 0.75rem;
+        }
+
+        .advanced-btn {
+            color: var(--gray-400);
+            background: transparent;
+            border: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            padding: 0.5rem 0;
+            transition: color 0.2s;
+        }
+
+        .advanced-btn:hover { color: var(--indigo-400); }
+
+        .advanced-panel {
+            background: rgba(0,0,0,0.2);
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-top: 1rem;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .advanced-panel label {
+            color: var(--gray-300);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .advanced-panel select {
+            width: 100%;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .advanced-panel select:focus { outline: none; border-color: var(--indigo-500); }
+        .advanced-panel select option { background: var(--gray-800); color: #fff; }
+
+        .results-area { padding: 3rem 0; background: var(--gray-100); }
+
+        .progress-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--gray-200);
+        }
+
+        .progress-bar-custom {
+            height: 8px;
+            background: var(--gray-200);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--indigo-500), var(--rose-500));
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        .results-table-wrap {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--gray-200);
+        }
+
+        .results-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .results-header h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin: 0;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .results-table th {
+            background: var(--gray-50);
+            padding: 0.875rem 1rem;
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gray-500);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .results-table td {
+            padding: 0.875rem 1rem;
+            border-bottom: 1px solid var(--gray-100);
+            font-size: 0.875rem;
+            color: var(--gray-700);
+            vertical-align: top;
+        }
+
+        .results-table tr:last-child td { border-bottom: none; }
+
+        .results-table tr:hover { background: var(--gray-50); }
+
+        .url-cell {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8125rem;
+            word-break: break-all;
+            max-width: 300px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.625rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .status-badge.s-2xx { background: #d1fae5; color: #065f46; }
+        .status-badge.s-301, .status-badge.s-308 { background: var(--indigo-100); color: var(--indigo-700); }
+        .status-badge.s-302, .status-badge.s-307 { background: #fef3c7; color: #92400e; }
+        .status-badge.s-4xx { background: #fee2e2; color: #991b1b; }
+        .status-badge.s-5xx { background: #fce7f3; color: #9d174d; }
+        .status-badge.s-err { background: #fee2e2; color: #991b1b; }
+
+        .redirect-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--gray-100);
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.8125rem;
+        }
+
+        .redirect-count.warn { background: #fef3c7; color: #92400e; }
+
+        .https-icon { font-size: 1rem; }
+        .https-icon.yes { color: var(--emerald-500); }
+        .https-icon.no { color: var(--rose-500); }
+
+        .sec { padding: 5rem 0; }
+        .sec-white { background: #fff; }
+        .sec-gray { background: var(--gray-100); }
+
+        .sec-header { text-align: center; margin-bottom: 3rem; }
+
+        .sec-badge {
+            display: inline-block;
+            background: var(--indigo-100);
+            color: var(--indigo-700);
+            padding: 0.375rem 1rem;
+            border-radius: 100px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            margin-bottom: 0.875rem;
+        }
+
+        .sec-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.75rem;
+        }
+
+        .sec-desc {
+            font-size: 1.0625rem;
+            color: var(--gray-500);
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .feat-card {
+            background: #fff;
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 1.75rem;
+            height: 100%;
+            transition: all 0.3s;
+        }
+
+        .feat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        .feat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .feat-icon.indigo { background: var(--indigo-100); color: var(--indigo-600); }
+        .feat-icon.rose { background: #ffe4e6; color: var(--rose-500); }
+        .feat-icon.emerald { background: #d1fae5; color: var(--emerald-500); }
+        .feat-icon.amber { background: #fef3c7; color: var(--amber-500); }
+
+        .feat-card h3 { font-size: 1.0625rem; font-weight: 700; color: var(--gray-800); margin-bottom: 0.5rem; }
+        .feat-card p { font-size: 0.9375rem; color: var(--gray-500); margin: 0; }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--indigo-950), var(--gray-900));
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .cta-section h2 { font-size: 1.75rem; font-weight: 700; color: #fff; margin-bottom: 0.75rem; }
+        .cta-section p { font-size: 1rem; color: var(--gray-400); margin-bottom: 1.5rem; }
+
+        .btn-cta {
+            background: linear-gradient(135deg, var(--rose-500), var(--rose-600));
+            color: #fff;
+            font-weight: 600;
+            padding: 0.875rem 2rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(244, 63, 94, 0.4); color: #fff; }
+
+        .footer {
+            background: var(--gray-900);
+            padding: 3rem 0 1.5rem;
+            color: var(--gray-400);
+        }
+
+        .footer-brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-brand i { color: var(--rose-500); }
+        .footer-desc { font-size: 0.875rem; color: var(--gray-500); max-width: 280px; }
+        .footer-title { font-size: 0.875rem; font-weight: 700; color: #fff; margin-bottom: 0.875rem; }
+        .footer-links { list-style: none; padding: 0; margin: 0; }
+        .footer-links li { margin-bottom: 0.5rem; }
+        .footer-links a { color: var(--gray-500); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--indigo-400); }
+
+        .footer-bottom {
+            border-top: 1px solid var(--gray-800);
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            text-align: center;
+            font-size: 0.8125rem;
+            color: var(--gray-600);
+        }
+
+        @media (max-width: 991px) {
+            .hero-title { font-size: 2.25rem; }
+            .results-table { display: block; overflow-x: auto; }
+        }
+
+        @media (max-width: 767px) {
+            .hero { padding: 3rem 0 4rem; }
+            .hero-title { font-size: 1.875rem; }
+            .sec { padding: 3.5rem 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span class="brand-logo"><i class="bi bi-arrow-repeat"></i></span>
+                TestRedirect
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Single URL</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="bulk-redirect-checker.html">Bulk Checker</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 hero-content mb-4 mb-lg-0">
+                    <div class="hero-pill"><i class="bi bi-stack"></i> Batch Processing</div>
+                    <h1 class="hero-title">Bulk <span class="gradient-text">Redirect</span> Checker</h1>
+                    <p class="hero-subtitle">Test up to 1000 URLs at once. Perfect for site migrations, SEO audits, and comprehensive redirect verification. Export results to CSV.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <div class="d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i><span class="text-white">Up to 1000 URLs</span></div>
+                        <div class="d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i><span class="text-white">CSV Export</span></div>
+                        <div class="d-flex align-items-center gap-2"><i class="bi bi-check-circle-fill text-success"></i><span class="text-white">Free</span></div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="tool-card">
+                        <form id="bulkForm">
+                            <textarea id="urlsInput" class="url-textarea" placeholder="Enter URLs (one per line)&#10;&#10;Example:&#10;example.com&#10;https://another-site.com/page&#10;http://test.com/old-url"></textarea>
+                            <div class="url-count"><span id="urlCount">0</span> / 1000 URLs</div>
+
+                            <div class="mt-3">
+                                <button type="button" class="advanced-btn" data-bs-toggle="collapse" data-bs-target="#advOpts">
+                                    <i class="bi bi-sliders2"></i> Advanced Options <i class="bi bi-chevron-down"></i>
+                                </button>
+                                <div class="collapse" id="advOpts">
+                                    <div class="advanced-panel">
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label>User Agent</label>
+                                                <select id="userAgent">
+                                                    <option value="Mozilla/5.0 (compatible; WebTools/1.0)">Default</option>
+                                                    <option value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0">Chrome</option>
+                                                    <option value="Googlebot/2.1 (+http://www.google.com/bot.html)">Googlebot</option>
+                                                    <option value="Mozilla/5.0 (compatible; bingbot/2.0)">Bingbot</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Concurrent Requests</label>
+                                                <select id="concurrent">
+                                                    <option value="3">3 (Safe)</option>
+                                                    <option value="5" selected>5 (Recommended)</option>
+                                                    <option value="10">10 (Fast)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex gap-3 mt-4">
+                                <button type="submit" id="checkBtn" class="btn-check-bulk">
+                                    <i class="bi bi-play-fill"></i> Start Checking
+                                </button>
+                                <button type="button" id="stopBtn" class="btn btn-outline-light" style="display: none;">
+                                    <i class="bi bi-stop-fill"></i> Stop
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="resultsArea" class="results-area d-none">
+        <div class="container">
+            <div id="progressCard" class="progress-card">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0" style="font-size: 1rem; font-weight: 600; color: var(--gray-800);">Processing URLs...</h4>
+                    <span id="progressPercent" class="text-muted">0%</span>
+                </div>
+                <div class="progress-bar-custom">
+                    <div id="progressFill" class="progress-bar-fill" style="width: 0%"></div>
+                </div>
+                <div class="progress-text">
+                    <span><span id="processedCount">0</span> processed</span>
+                    <span><span id="remainingCount">0</span> remaining</span>
+                </div>
+            </div>
+
+            <div class="results-table-wrap">
+                <div class="results-header">
+                    <h3><i class="bi bi-table me-2"></i>Results</h3>
+                    <button id="exportBtn" class="btn-export d-none">
+                        <i class="bi bi-download"></i> Export CSV
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">#</th>
+                                <th>Original URL</th>
+                                <th>Final URL</th>
+                                <th style="width: 100px;">Status</th>
+                                <th style="width: 80px;">Redirects</th>
+                                <th style="width: 70px;">HTTPS</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec sec-white">
+        <div class="container">
+            <div class="sec-header">
+                <span class="sec-badge">Features</span>
+                <h2 class="sec-title">Why Use Bulk Checker?</h2>
+                <p class="sec-desc">Our bulk redirect checker is designed for efficiency and scale, making large redirect audits simple.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="feat-card">
+                        <div class="feat-icon indigo"><i class="bi bi-lightning-charge"></i></div>
+                        <h3>Fast Processing</h3>
+                        <p>Concurrent requests for quick batch processing of hundreds of URLs.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feat-card">
+                        <div class="feat-icon rose"><i class="bi bi-file-earmark-spreadsheet"></i></div>
+                        <h3>CSV Export</h3>
+                        <p>Download results as CSV for easy analysis in Excel or Google Sheets.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feat-card">
+                        <div class="feat-icon emerald"><i class="bi bi-arrow-left-right"></i></div>
+                        <h3>Migration Ready</h3>
+                        <p>Perfect for verifying redirects after domain or URL structure changes.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feat-card">
+                        <div class="feat-icon amber"><i class="bi bi-shield-check"></i></div>
+                        <h3>Complete Analysis</h3>
+                        <p>See status codes, redirect counts, and HTTPS status for each URL.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec sec-gray">
+        <div class="container">
+            <div class="sec-header">
+                <span class="sec-badge">How It Works</span>
+                <h2 class="sec-title">Simple 3-Step Process</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 64px; height: 64px; background: linear-gradient(135deg, var(--indigo-600), var(--rose-500)); color: #fff; font-size: 1.5rem; font-weight: 700;">1</div>
+                                <h4 style="font-size: 1.125rem; font-weight: 700; color: var(--gray-800);">Paste URLs</h4>
+                                <p class="text-muted">Enter up to 1000 URLs, one per line. We auto-add HTTPS if needed.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 64px; height: 64px; background: linear-gradient(135deg, var(--indigo-600), var(--rose-500)); color: #fff; font-size: 1.5rem; font-weight: 700;">2</div>
+                                <h4 style="font-size: 1.125rem; font-weight: 700; color: var(--gray-800);">Start Check</h4>
+                                <p class="text-muted">Click the button and watch real-time progress as URLs are checked.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 64px; height: 64px; background: linear-gradient(135deg, var(--indigo-600), var(--rose-500)); color: #fff; font-size: 1.5rem; font-weight: 700;">3</div>
+                                <h4 style="font-size: 1.125rem; font-weight: 700; color: var(--gray-800);">Export Results</h4>
+                                <p class="text-muted">Review results in the table and export to CSV for reporting.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Need to Check Just One URL?</h2>
+            <p>Use our single URL checker for quick redirect analysis with detailed chain visualization.</p>
+            <a href="index.html" class="btn-cta"><i class="bi bi-arrow-right-circle"></i> Single URL Checker</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 mb-3 mb-lg-0">
+                    <div class="footer-brand"><i class="bi bi-arrow-repeat"></i> TestRedirect</div>
+                    <p class="footer-desc">Free URL redirect checker. Test redirects and optimize your SEO.</p>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5 class="footer-title">Tools</h5>
+                    <ul class="footer-links"><li><a href="index.html">Single URL</a></li><li><a href="bulk-redirect-checker.html">Bulk Checker</a></li></ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5 class="footer-title">Company</h5>
+                    <ul class="footer-links"><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5 class="footer-title">Legal</h5>
+                    <ul class="footer-links"><li><a href="privacy-policy.html">Privacy</a></li><li><a href="terms-of-use.html">Terms</a></li></ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h5 class="footer-title">Help</h5>
+                    <ul class="footer-links"><li><a href="contact.html">Support</a></li></ul>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 TestRedirect. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const API_BASE = 'https://api.tickspike.com/api/v1';
+        let results = [];
+        let isRunning = false;
+        let shouldStop = false;
+
+        const urlsInput = document.getElementById('urlsInput');
+        const urlCount = document.getElementById('urlCount');
+        const bulkForm = document.getElementById('bulkForm');
+        const checkBtn = document.getElementById('checkBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const resultsArea = document.getElementById('resultsArea');
+        const progressCard = document.getElementById('progressCard');
+        const progressFill = document.getElementById('progressFill');
+        const progressPercent = document.getElementById('progressPercent');
+        const processedCount = document.getElementById('processedCount');
+        const remainingCount = document.getElementById('remainingCount');
+        const resultsBody = document.getElementById('resultsBody');
+        const exportBtn = document.getElementById('exportBtn');
+
+        urlsInput.addEventListener('input', function() {
+            const urls = getUrls();
+            urlCount.textContent = urls.length;
+            if (urls.length > 1000) {
+                urlCount.style.color = '#dc2626';
+            } else {
+                urlCount.style.color = '';
+            }
+        });
+
+        function getUrls() {
+            return urlsInput.value.split('\n').map(u => u.trim()).filter(u => u.length > 0);
+        }
+
+        function normalizeUrl(url) {
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                return 'https://' + url;
+            }
+            return url;
+        }
+
+        bulkForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            if (isRunning) return;
+
+            const urls = getUrls();
+            if (urls.length === 0) {
+                alert('Please enter at least one URL');
+                return;
+            }
+            if (urls.length > 1000) {
+                alert('Maximum 1000 URLs allowed');
+                return;
+            }
+
+            isRunning = true;
+            shouldStop = false;
+            results = [];
+            resultsBody.innerHTML = '';
+            resultsArea.classList.remove('d-none');
+            progressCard.style.display = 'block';
+            exportBtn.classList.add('d-none');
+            checkBtn.disabled = true;
+            stopBtn.style.display = 'inline-flex';
+
+            resultsArea.scrollIntoView({ behavior: 'smooth' });
+
+            const userAgent = document.getElementById('userAgent').value;
+            const concurrent = parseInt(document.getElementById('concurrent').value);
+            const total = urls.length;
+
+            let processed = 0;
+
+            const updateProgress = () => {
+                const percent = Math.round((processed / total) * 100);
+                progressFill.style.width = percent + '%';
+                progressPercent.textContent = percent + '%';
+                processedCount.textContent = processed;
+                remainingCount.textContent = total - processed;
+            };
+
+            updateProgress();
+
+            const checkUrl = async (url, index) => {
+                if (shouldStop) return null;
+
+                const normalizedUrl = normalizeUrl(url);
+                try {
+                    const res = await fetch(`${API_BASE}/redirect-check/`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Origin': 'https://testredirect.github.io' },
+                        body: JSON.stringify({ url: normalizedUrl, user_agent: userAgent, max_redirects: 10 })
+                    });
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data.error || 'Failed');
+                    return {
+                        index: index + 1,
+                        original: url,
+                        final: data.final_url || 'N/A',
+                        status: data.redirect_chain && data.redirect_chain.length > 0
+                            ? data.redirect_chain[data.redirect_chain.length - 1].status_code
+                            : 'N/A',
+                        redirects: data.total_redirects,
+                        https: data.is_https,
+                        error: null
+                    };
+                } catch (err) {
+                    return {
+                        index: index + 1,
+                        original: url,
+                        final: 'Error',
+                        status: 'ERR',
+                        redirects: 0,
+                        https: false,
+                        error: err.message
+                    };
+                }
+            };
+
+            const addResultRow = (result) => {
+                const statusClass = getStatusClass(result.status);
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${result.index}</td>
+                    <td class="url-cell">${escapeHtml(result.original)}</td>
+                    <td class="url-cell">${escapeHtml(result.final)}</td>
+                    <td><span class="status-badge ${statusClass}">${result.status}</span></td>
+                    <td><span class="redirect-count ${result.redirects > 2 ? 'warn' : ''}">${result.redirects}</span></td>
+                    <td><i class="bi ${result.https ? 'bi-check-circle-fill https-icon yes' : 'bi-x-circle-fill https-icon no'}"></i></td>
+                `;
+                resultsBody.appendChild(row);
+                results.push(result);
+            };
+
+            // Process in batches
+            for (let i = 0; i < urls.length; i += concurrent) {
+                if (shouldStop) break;
+
+                const batch = urls.slice(i, i + concurrent);
+                const promises = batch.map((url, idx) => checkUrl(url, i + idx));
+                const batchResults = await Promise.all(promises);
+
+                batchResults.forEach(result => {
+                    if (result) {
+                        addResultRow(result);
+                        processed++;
+                        updateProgress();
+                    }
+                });
+            }
+
+            isRunning = false;
+            checkBtn.disabled = false;
+            stopBtn.style.display = 'none';
+            progressCard.style.display = 'none';
+            exportBtn.classList.remove('d-none');
+        });
+
+        stopBtn.addEventListener('click', function() {
+            shouldStop = true;
+            stopBtn.disabled = true;
+            stopBtn.innerHTML = '<i class="bi bi-hourglass"></i> Stopping...';
+        });
+
+        exportBtn.addEventListener('click', function() {
+            if (results.length === 0) return;
+
+            const headers = ['#', 'Original URL', 'Final URL', 'Status', 'Redirects', 'HTTPS'];
+            const csvContent = [
+                headers.join(','),
+                ...results.map(r => [
+                    r.index,
+                    `"${r.original}"`,
+                    `"${r.final}"`,
+                    r.status,
+                    r.redirects,
+                    r.https ? 'Yes' : 'No'
+                ].join(','))
+            ].join('\n');
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'redirect-results.csv';
+            link.click();
+        });
+
+        function getStatusClass(status) {
+            if (status === 'ERR') return 's-err';
+            const code = parseInt(status);
+            if (code >= 200 && code < 300) return 's-2xx';
+            if (code === 301 || code === 308) return 's-301';
+            if (code === 302 || code === 307) return 's-302';
+            if (code >= 400 && code < 500) return 's-4xx';
+            if (code >= 500) return 's-5xx';
+            return '';
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>

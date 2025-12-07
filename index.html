@@ -9,14 +9,14 @@
     <meta name="author" content="TestRedirect">
     <meta name="robots" content="index, follow">
 
-    <link rel="canonical" href="https://testredirect.com">
+    <link rel="canonical" href="https://testredirect.github.io/">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Test Redirect | Free URL Redirect Checker & Analyzer Tool">
     <meta property="og:description" content="Instantly test and analyze URL redirects. Check 301, 302, 307, 308 status codes, detect redirect chains and loops, verify HTTPS redirections. Free online redirect checker for SEO professionals.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://testredirect.com">
+    <meta property="og:url" content="https://testredirect.github.io/">
     <meta property="og:site_name" content="TestRedirect">
     <meta property="og:locale" content="en_US">
 
@@ -42,7 +42,7 @@
         "@type": "WebApplication",
         "name": "TestRedirect - URL Redirect Checker",
         "description": "Free online tool to test URL redirects, check 301/302/307/308 status codes, analyze redirect chains",
-        "url": "https://testredirect.com",
+        "url": "https://testredirect.github.io/",
         "applicationCategory": "SEO Tool",
         "operatingSystem": "Web Browser",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
@@ -1269,7 +1269,7 @@
             try {
                 const res = await fetch(`${API_BASE}/redirect-check/`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Origin': 'https://testredirect.com' },
+                    headers: { 'Content-Type': 'application/json', 'Origin': 'https://testredirect.github.io' },
                     body: JSON.stringify({ url, user_agent: ua, max_redirects: maxRed })
                 });
                 const data = await res.json();
