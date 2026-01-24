@@ -752,7 +752,57 @@
         </div>
     </section>
 
-    <footer class="footer">
+    
+    <!-- Comments Section -->
+    <section class="comments-section py-4">
+        <div class="container">
+            <div class="comments-card">
+                <h3 class="comments-title">
+                    <i class="bi bi-chat-dots me-2"></i>Comments & Feedback
+                </h3>
+                <p class="comments-subtitle">Share your experience or ask questions about this tool</p>
+                <div class="comentario-wrapper">
+                    <script defer src="https://comments.tickspike.com/comentario.js"></script>
+                    <comentario-comments theme="light"></comentario-comments>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .comments-section {
+            background: transparent;
+            margin-top: 1rem;
+        }
+        
+        .comments-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .comments-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--indigo-600);
+            margin-bottom: 0.5rem;
+        }
+        
+        .comments-subtitle {
+            color: #6c757d;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .comentario-wrapper {
+            min-height: 200px;
+        }
+    </style>
+
+<footer class="footer">
         <div class="container">
             <div class="row g-4">
                 <div class="col-lg-4 mb-3 mb-lg-0">
