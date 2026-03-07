@@ -449,6 +449,31 @@
 
         .chain-type { font-size: 0.75rem; color: var(--gray-500); margin-left: 0.5rem; }
 
+        /* Summary grid - 5 columns */
+        .summary-boxes { grid-template-columns: repeat(5, 1fr); }
+        @media (max-width: 1199px) { .summary-boxes { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 767px)  { .summary-boxes { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 575px)  { .summary-boxes { grid-template-columns: 1fr; } }
+
+        /* Hop accordion card */
+        .hop-card { background: #fff; border: 1px solid var(--gray-200); border-radius: 12px; margin-bottom: 0.75rem; overflow: hidden; transition: border-color 0.2s; }
+        .hop-card:hover { border-color: var(--indigo-200); }
+        .hop-header { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 1.25rem; }
+        .hop-badges { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; margin-top: 0.375rem; }
+
+        .badge-timing { display: inline-flex; align-items: center; padding: 0.2rem 0.5rem; background: var(--gray-100); color: var(--gray-600); border-radius: 6px; font-size: 0.6875rem; font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+        .badge-cookie { display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.2rem 0.5rem; background: #fff7ed; color: #c2410c; border-radius: 6px; font-size: 0.6875rem; font-weight: 600; }
+
+        .hop-acc-btn { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0.625rem 1.25rem; background: var(--gray-50); border: none; border-top: 1px solid var(--gray-100); cursor: pointer; text-align: left; font-size: 0.75rem; font-weight: 600; color: var(--gray-600); transition: background 0.15s; }
+        .hop-acc-btn:hover { background: #eef2ff; }
+        .hop-acc-panel { padding: 0.75rem 1.25rem 1rem; background: var(--gray-50); border-top: 1px solid var(--gray-100); overflow-x: auto; }
+        .hop-redirect-arrow { text-align: center; padding: 0.5rem; background: var(--gray-50); border-top: 1px solid var(--gray-100); font-size: 0.75rem; color: var(--gray-400); }
+
+        .hdr-row { display: flex; gap: 0.75rem; padding: 0.3rem 0; border-bottom: 1px solid var(--gray-100); font-size: 0.725rem; font-family: 'JetBrains Mono', monospace; }
+        .hdr-row:last-child { border-bottom: none; }
+        .hdr-key { font-weight: 700; color: var(--gray-700); flex-shrink: 0; width: 210px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .hdr-val { color: var(--gray-600); word-break: break-all; }
+
         /* Error */
         .error-box {
             background: #fef2f2;
@@ -908,6 +933,7 @@
                     <div class="summary-box"><div class="summary-box-label">Final URL</div><div id="destUrl" class="summary-box-value ok"></div></div>
                     <div class="summary-box"><div class="summary-box-label">Redirects</div><div id="numRedirects" class="summary-box-value"></div></div>
                     <div class="summary-box"><div class="summary-box-label">HTTPS</div><div id="httpsVal" class="summary-box-value"></div></div>
+                    <div class="summary-box"><div class="summary-box-label">Scan Time</div><div id="scanTimeVal" class="summary-box-value"></div></div>
                 </div>
             </div>
             <div id="chainCard" class="result-card d-none">
@@ -1333,10 +1359,79 @@
             } finally { loadingBox.classList.add('d-none'); }
         }
 
+        function escapeHtml(str) {
+            return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        function getBadgeClass(code) {
+            if (code >= 200 && code < 300) return 'b-2xx';
+            if (code === 301 || code === 308) return 'b-301';
+            if (code === 302 || code === 303 || code === 307) return 'b-302';
+            if (code >= 400 && code < 500) return 'b-4xx';
+            return 'b-5xx';
+        }
+
+        function getLabel(code) {
+            const labels = {
+                200: 'OK', 201: 'Created', 204: 'No Content',
+                301: 'Moved Permanently', 302: 'Found', 303: 'See Other',
+                307: 'Temporary Redirect', 308: 'Permanent Redirect',
+                400: 'Bad Request', 401: 'Unauthorized', 403: 'Forbidden',
+                404: 'Not Found', 429: 'Too Many Requests',
+                500: 'Internal Server Error', 502: 'Bad Gateway', 503: 'Service Unavailable',
+            };
+            return labels[code] || '';
+        }
+
+        function buildHeaderRows(obj) {
+            if (!obj || !Object.keys(obj).length) return '<span class="text-muted" style="font-size:0.75rem">None</span>';
+            return Object.entries(obj).map(([k, v]) =>
+                `<div class="hdr-row"><span class="hdr-key" title="${escapeHtml(k)}">${escapeHtml(k)}:</span><span class="hdr-val">${escapeHtml(String(v))}</span></div>`
+            ).join('');
+        }
+
+        function buildMetaRows(meta) {
+            if (!meta || !Object.keys(meta).length) return '<span class="text-muted" style="font-size:0.75rem">Not available</span>';
+            const labels = {
+                http_code: 'HTTP Code', http_version: 'HTTP Version', total_time: 'Total Time (s)',
+                content_type: 'Content-Type', content_length: 'Content-Length', redirect_url: 'Redirect URL',
+                primary_ip: 'Primary IP', primary_port: 'Primary Port', scheme: 'Scheme',
+            };
+            return Object.entries(meta)
+                .filter(([, v]) => v !== '' && v !== -1 && v !== null)
+                .map(([k, v]) =>
+                    `<div class="hdr-row"><span class="hdr-key">${labels[k] || k}:</span><span class="hdr-val">${escapeHtml(String(v))}</span></div>`
+                ).join('');
+        }
+
+        function hopAccordion(uid, icon, label, content, badge) {
+            const badgeHtml = badge ? ` <span style="font-weight:400;color:var(--gray-400)">(${badge})</span>` : '';
+            return `
+                <div>
+                    <button class="hop-acc-btn" onclick="toggleHopPanel('${uid}')">
+                        <span><i class="bi ${icon} me-2" style="color:var(--gray-400)"></i>${label}${badgeHtml}</span>
+                        <i id="${uid}-icon" class="bi bi-chevron-down" style="font-size:0.75rem;color:var(--gray-400)"></i>
+                    </button>
+                    <div id="${uid}" class="hop-acc-panel">
+                        ${content}
+                    </div>
+                </div>`;
+        }
+
+        function toggleHopPanel(id) {
+            const panel = document.getElementById(id);
+            const icon  = document.getElementById(id + '-icon');
+            const closing = panel.style.display !== 'none';
+            panel.style.display = closing ? 'none' : '';
+            icon.className = `bi ${closing ? 'bi-chevron-right' : 'bi-chevron-down'}`;
+            icon.style.cssText = 'font-size:0.75rem;color:var(--gray-400)';
+        }
+
         function showResults(data) {
             document.getElementById('origUrl').textContent = data.original_url;
             document.getElementById('destUrl').textContent = data.final_url || 'N/A';
             document.getElementById('numRedirects').textContent = data.total_redirects;
+            document.getElementById('scanTimeVal').textContent = data.scan_time != null ? data.scan_time + 's' : '—';
 
             const httpsVal = document.getElementById('httpsVal');
             if (data.is_https) {
@@ -1350,40 +1445,54 @@
             const chainList = document.getElementById('chainList');
             chainList.innerHTML = '';
 
-            if (data.redirect_chain && data.redirect_chain.length) {
-                data.redirect_chain.forEach((s, i) => {
-                    const isLast = i === data.redirect_chain.length - 1;
-                    const badgeClass = getBadgeClass(s.status_code);
-                    const label = getLabel(s.status_code);
-                    chainList.innerHTML += `
-                        <div class="chain-item">
-                            <div class="chain-step-num ${isLast ? 'done' : ''}">${i + 1}</div>
-                            <div class="flex-grow-1">
-                                <div class="chain-url">${s.url}</div>
+            (data.redirect_chain || []).forEach((s, i) => {
+                const isLast = i === data.redirect_chain.length - 1;
+                const uid = `hop${i}`;
+                const badgeClass = getBadgeClass(s.status_code);
+                const label = getLabel(s.status_code);
+
+                const timingBadge = s.response_time_ms != null
+                    ? `<span class="badge-timing">${s.response_time_ms} ms</span>` : '';
+                const cookieBadge = s.has_cookies
+                    ? `<span class="badge-cookie" title="${escapeHtml((s.cookies||[]).join(', '))}">🍪 ${(s.cookies||[]).length} Cookie${(s.cookies||[]).length !== 1 ? 's' : ''}</span>` : '';
+                const hopType = isLast
+                    ? `<span class="chain-type"><i class="bi bi-check-lg text-success"></i> Final Destination</span>`
+                    : `<span class="chain-type">→ Redirects</span>`;
+
+                const reqCount = Object.keys(s.request_headers || {}).length;
+                const resCount = Object.keys(s.headers || {}).length;
+
+                const bodyContent = s.response_body
+                    ? `<pre style="font-size:0.7rem;color:var(--gray-700);white-space:pre-wrap;word-break:break-all;margin:0;line-height:1.5">${escapeHtml(s.response_body)}</pre>
+                       ${s.body_truncated ? '<p style="font-size:0.7rem;color:#c2410c;margin-top:0.5rem;margin-bottom:0">[ Output truncated at 4 KB ]</p>' : ''}`
+                    : '<span class="text-muted" style="font-size:0.75rem">No body captured</span>';
+
+                const card = document.createElement('div');
+                card.className = 'hop-card';
+                card.innerHTML = `
+                    <div class="hop-header">
+                        <div class="chain-step-num ${isLast ? 'done' : ''}">${i + 1}</div>
+                        <div class="flex-grow-1" style="min-width:0">
+                            <div class="chain-url">${escapeHtml(s.url)}</div>
+                            <div class="hop-badges">
                                 <span class="chain-badge ${badgeClass}">${s.status_code} ${label}</span>
-                                <span class="chain-type">${isLast ? 'Final' : 'Redirect'}</span>
+                                ${timingBadge}
+                                ${cookieBadge}
+                                ${hopType}
                             </div>
-                            ${!isLast ? '<i class="bi bi-arrow-down text-muted ms-auto"></i>' : '<i class="bi bi-check-lg text-success ms-auto fs-5"></i>'}
                         </div>
-                    `;
-                });
-            }
+                    </div>
+                    ${hopAccordion(`${uid}-req`,  'bi-send',        'Request Headers',  buildHeaderRows(s.request_headers), `${reqCount} headers`)}
+                    ${hopAccordion(`${uid}-res`,  'bi-reply-all',   'Response Headers', buildHeaderRows(s.headers),          `${resCount} headers`)}
+                    ${hopAccordion(`${uid}-body`, 'bi-code-slash',  'Response Body',    bodyContent)}
+                    ${hopAccordion(`${uid}-meta`, 'bi-info-circle', 'Metadata',         buildMetaRows(s.metadata))}
+                    ${!isLast ? '<div class="hop-redirect-arrow"><i class="bi bi-arrow-down me-1"></i>Redirects to next URL</div>' : ''}
+                `;
+                chainList.appendChild(card);
+            });
 
             document.getElementById('summaryCard').classList.remove('d-none');
             document.getElementById('chainCard').classList.remove('d-none');
-        }
-
-        function getBadgeClass(code) {
-            if (code >= 200 && code < 300) return 'b-2xx';
-            if (code === 301 || code === 308) return 'b-301';
-            if (code === 302 || code === 307) return 'b-302';
-            if (code >= 400 && code < 500) return 'b-4xx';
-            return 'b-5xx';
-        }
-
-        function getLabel(code) {
-            const labels = { 200: 'OK', 301: 'Permanent', 302: 'Found', 307: 'Temp Redirect', 308: 'Permanent', 404: 'Not Found', 500: 'Server Error' };
-            return labels[code] || '';
         }
 
         document.querySelectorAll('.faq-q').forEach(q => {
