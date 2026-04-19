@@ -12,21 +12,6 @@
     <link rel="canonical" href="https://testredirect.github.io/bulk-redirect-checker">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-    <meta property="og:title" content="Bulk Redirect Checker | Test Multiple URLs - TestRedirect">
-    <meta property="og:description" content="Test up to 1000 URLs at once. Bulk redirect checker for site migrations and SEO audits with CSV export.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://testredirect.github.io/bulk-redirect-checker">
-    <meta property="og:site_name" content="TestRedirect">
-
-    <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://testredirect.github.io/og-image.png">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Bulk Redirect Checker | Test Multiple URLs">
-    <meta name="twitter:description" content="Test up to 1000 URLs at once. Bulk redirect checker for site migrations and SEO audits.">
-    <meta name="twitter:site" content="@testredirect">
-    <meta name="twitter:image" content="https://testredirect.github.io/og-image.png">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -35,6 +20,7 @@
         :root {
             --indigo-50: #eef2ff;
             --indigo-100: #e0e7ff;
+            --indigo-300: #a5b4fc;
             --indigo-400: #818cf8;
             --indigo-500: #6366f1;
             --indigo-600: #4f46e5;
@@ -64,7 +50,7 @@
         body {
             font-family: 'Space Grotesk', sans-serif;
             color: var(--gray-700);
-            line-height: 1.6;
+            line-height: 1.7;
             background: var(--gray-50);
         }
 
@@ -162,6 +148,13 @@
             font-size: 1.0625rem;
             color: var(--gray-400);
             margin-bottom: 2rem;
+        }
+
+        .step-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 0.5rem;
         }
 
         .tool-card {
@@ -725,21 +718,21 @@
                         <div class="col-md-4">
                             <div class="text-center">
                                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 64px; height: 64px; background: linear-gradient(135deg, var(--indigo-600), var(--rose-500)); color: #fff; font-size: 1.5rem; font-weight: 700;">1</div>
-                                <h4 style="font-size: 1.125rem; font-weight: 700; color: var(--gray-800);">Paste URLs</h4>
+                                <h4 class="step-title">Paste URLs</h4>
                                 <p class="text-muted">Enter up to 1000 URLs, one per line. We auto-add HTTPS if needed.</p>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="text-center">
                                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 64px; height: 64px; background: linear-gradient(135deg, var(--indigo-600), var(--rose-500)); color: #fff; font-size: 1.5rem; font-weight: 700;">2</div>
-                                <h4 style="font-size: 1.125rem; font-weight: 700; color: var(--gray-800);">Start Check</h4>
+                                <h4 class="step-title">Start Check</h4>
                                 <p class="text-muted">Click the button and watch real-time progress as URLs are checked.</p>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="text-center">
                                 <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 64px; height: 64px; background: linear-gradient(135deg, var(--indigo-600), var(--rose-500)); color: #fff; font-size: 1.5rem; font-weight: 700;">3</div>
-                                <h4 style="font-size: 1.125rem; font-weight: 700; color: var(--gray-800);">Export Results</h4>
+                                <h4 class="step-title">Export Results</h4>
                                 <p class="text-muted">Review results in the table and export to CSV for reporting.</p>
                             </div>
                         </div>

@@ -12,20 +12,6 @@
     <link rel="canonical" href="https://testredirect.github.io/contact">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-    <meta property="og:title" content="Contact Us | TestRedirect">
-    <meta property="og:description" content="Contact TestRedirect for support, feedback, or business inquiries.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://testredirect.github.io/contact">
-    <meta property="og:site_name" content="TestRedirect">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://testredirect.github.io/og-image.png">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Contact Us | TestRedirect">
-    <meta name="twitter:description" content="Contact TestRedirect for support, feedback, or business inquiries. We're here to help with your redirect testing needs.">
-    <meta name="twitter:site" content="@testredirect">
-    <meta name="twitter:image" content="https://testredirect.github.io/og-image.png">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -504,4 +490,8 @@
             form.reset();
 
             // Hide success message after 5 seconds
-            setTimeout((
+            setTimeout(() => { successMessage.classList.remove('show'); }, 5000);
+        });
+    </script>
+</body>
+</html>

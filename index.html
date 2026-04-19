@@ -12,22 +12,6 @@
     <link rel="canonical" href="https://testredirect.github.io">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Test Redirect | Free URL Redirect Checker & Analyzer Tool">
-    <meta property="og:description" content="Instantly test and analyze URL redirects. Check 301, 302, 307, 308 status codes, detect redirect chains and loops, verify HTTPS redirections. Free online redirect checker for SEO professionals.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://testredirect.github.io">
-    <meta property="og:site_name" content="TestRedirect">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://testredirect.github.io/og-image.png">
-
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Test Redirect | Free URL Redirect Checker Tool">
-    <meta name="twitter:description" content="Free redirect checker to test 301, 302, 307, 308 redirects. Analyze redirect chains, detect loops, verify HTTPS. Essential SEO tool for webmasters.">
-    <meta name="twitter:site" content="@testredirect">
-    <meta name="twitter:image" content="https://testredirect.github.io/og-image.png">
-
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -56,6 +40,7 @@
             --indigo-50: #eef2ff;
             --indigo-100: #e0e7ff;
             --indigo-200: #c7d2fe;
+            --indigo-300: #a5b4fc;
             --indigo-400: #818cf8;
             --indigo-500: #6366f1;
             --indigo-600: #4f46e5;
@@ -88,7 +73,7 @@
         body {
             font-family: 'Space Grotesk', sans-serif;
             color: var(--gray-700);
-            line-height: 1.6;
+            line-height: 1.7;
             background: var(--gray-50);
         }
 
@@ -960,7 +945,7 @@
             </div>
             <div class="row g-4 align-items-center">
                 <div class="col-lg-6">
-                    <h3 class="h4 mb-3" style="color: var(--gray-800);">Why Testing Redirects Matters</h3>
+                    <h3 class="h4 mb-3">Why Testing Redirects Matters</h3>
                     <p class="text-muted mb-4">URL redirects are essential for website maintenance and SEO. When you move content, change domains, or implement HTTPS, redirects guide users and search engines to the right place. Misconfigured redirects can destroy search rankings and frustrate visitors.</p>
                     <p class="text-muted mb-4">Our tool instantly analyzes redirect configurations, detecting wrong status codes, excessive chains that slow loading, and loops that block access. Whether migrating sites or auditing SEO, proper redirect testing is critical.</p>
                     <div class="row g-3">
@@ -1205,15 +1190,15 @@
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="faq-item"><div class="faq-q open">What is a URL redirect?<i class="bi bi-chevron-down"></i></div><div class="faq-a show">A URL redirect automatically sends users and search engines from one URL to another. Testing is crucial because misconfigured redirects cause lost rankings and poor user experience.</div></div>
-                    <div class="faq-item"><div class="faq-q">What's the difference between 301 and 302?<i class="bi bi-chevron-down"></i></div><div class="faq-a">301 is permanent and passes 90-99% of SEO value. 302 is temporary and doesn't pass full value. Use 301 for permanent moves, 302 for temporary situations.</div></div>
-                    <div class="faq-item"><div class="faq-q">How many redirects is too many?<i class="bi bi-chevron-down"></i></div><div class="faq-a">Google recommends max 3 hops, but ideally use 1 direct redirect. Long chains slow loading and waste crawl budget.</div></div>
-                    <div class="faq-item"><div class="faq-q">What is a redirect loop?<i class="bi bi-chevron-down"></i></div><div class="faq-a">A loop occurs when URLs redirect in a circle (A→B→A). This blocks access completely. Fix by identifying and removing circular redirect rules.</div></div>
-                    <div class="faq-item"><div class="faq-q">How do I test as Googlebot?<i class="bi bi-chevron-down"></i></div><div class="faq-a">Click Advanced Options and select Googlebot from the User Agent dropdown. This shows exactly what Google's crawler experiences.</div></div>
-                    <div class="faq-item"><div class="faq-q">Does 301 pass all SEO value?<i class="bi bi-chevron-down"></i></div><div class="faq-a">301s pass approximately 90-99% of link equity, not 100%. Some "PageRank dampening" occurs with any redirect, but 301 is still the best option.</div></div>
-                    <div class="faq-item"><div class="faq-q">Can I test multiple URLs?<i class="bi bi-chevron-down"></i></div><div class="faq-a">Yes! Our <a href="/bulk-redirect-checker">Bulk Checker</a> tests up to 1000 URLs at once with CSV export.</div></div>
-                    <div class="faq-item"><div class="faq-q">Why does my 301 show as 302?<i class="bi bi-chevron-down"></i></div><div class="faq-a">Possible causes: CDN converting redirects, conflicting rules, CMS/plugins overriding config, or server-level redirects taking precedence. Check all redirect sources.</div></div>
-                    <div class="faq-item"><div class="faq-q">What's 307 vs 302?<i class="bi bi-chevron-down"></i></div><div class="faq-a">Both are temporary, but 307 preserves HTTP method (POST stays POST). For standard page redirects, the difference is usually negligible.</div></div>
-                    <div class="faq-item"><div class="faq-q">How often should I test?<i class="bi bi-chevron-down"></i></div><div class="faq-a">After any redirect-related changes, CMS updates, plugin updates, and during regular SEO audits (monthly or quarterly).</div></div>
+                    <div class="faq-item"><div class="faq-q open">What's the difference between 301 and 302?<i class="bi bi-chevron-down"></i></div><div class="faq-a show">301 is permanent and passes 90-99% of SEO value. 302 is temporary and doesn't pass full value. Use 301 for permanent moves, 302 for temporary situations.</div></div>
+                    <div class="faq-item"><div class="faq-q open">How many redirects is too many?<i class="bi bi-chevron-down"></i></div><div class="faq-a show">Google recommends max 3 hops, but ideally use 1 direct redirect. Long chains slow loading and waste crawl budget.</div></div>
+                    <div class="faq-item"><div class="faq-q open">What is a redirect loop?<i class="bi bi-chevron-down"></i></div><div class="faq-a show">A loop occurs when URLs redirect in a circle (A→B→A). This blocks access completely. Fix by identifying and removing circular redirect rules.</div></div>
+                    <div class="faq-item"><div class="faq-q open">How do I test as Googlebot?<i class="bi bi-chevron-down"></i></div><div class="faq-a show">Click Advanced Options and select Googlebot from the User Agent dropdown. This shows exactly what Google's crawler experiences.</div></div>
+                    <div class="faq-item"><div class="faq-q open">Does 301 pass all SEO value?<i class="bi bi-chevron-down"></i></div><div class="faq-a show">301s pass approximately 90-99% of link equity, not 100%. Some "PageRank dampening" occurs with any redirect, but 301 is still the best option.</div></div>
+                    <div class="faq-item"><div class="faq-q open">Can I test multiple URLs?<i class="bi bi-chevron-down"></i></div><div class="faq-a show">Yes! Our <a href="/bulk-redirect-checker">Bulk Checker</a> tests up to 1000 URLs at once with CSV export.</div></div>
+                    <div class="faq-item"><div class="faq-q open">Why does my 301 show as 302?<i class="bi bi-chevron-down"></i></div><div class="faq-a show">Possible causes: CDN converting redirects, conflicting rules, CMS/plugins overriding config, or server-level redirects taking precedence. Check all redirect sources.</div></div>
+                    <div class="faq-item"><div class="faq-q open">What's 307 vs 302?<i class="bi bi-chevron-down"></i></div><div class="faq-a show">Both are temporary, but 307 preserves HTTP method (POST stays POST). For standard page redirects, the difference is usually negligible.</div></div>
+                    <div class="faq-item"><div class="faq-q open">How often should I test?<i class="bi bi-chevron-down"></i></div><div class="faq-a show">After any redirect-related changes, CMS updates, plugin updates, and during regular SEO audits (monthly or quarterly).</div></div>
                 </div>
             </div>
         </div>
@@ -1263,7 +1248,7 @@
     .comments-title {
         font-size: 1.5rem;
         font-weight: 700;
-        color: var(--primary-color);
+        color: var(--indigo-600);
         margin-bottom: 0.5rem;
     }
     
